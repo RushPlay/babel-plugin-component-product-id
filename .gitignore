@@ -1,0 +1,4 @@
+*.log
+*.report.xml
+/coverage
+/node_modules
