@@ -1,6 +1,10 @@
 {
   "name": "@rushplay/babel-preset-react",
   "version": "0.0.0-development",
+  "main": "index.js",
+  "files": [
+    "plugins"
+  ],
   "scripts": {
     "ci:build": "echo 'Skipping...'",
     "ci:deploy": "semantic-release pre && npm publish && semantic-release post",
@@ -43,6 +47,7 @@
     "@rushplay/eslint-config-rushplay": "1.0.1",
     "@rushplay/eslint-plugin-objects": "1.2.0",
     "@rushplay/validate-commit-msgs": "^0.1.0",
+    "babel-core": "^6.24.0",
     "condition-circle": "^1.5.0",
     "eslint": "^3.14.0",
     "eslint-plugin-import": "^2.2.0",
