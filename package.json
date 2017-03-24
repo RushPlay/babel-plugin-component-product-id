@@ -1,4 +1,67 @@
 {
   "name": "@rushplay/babel-preset-react",
-  "version": "0.0.0"
+  "version": "0.0.0-development",
+  "main": "index.js",
+  "files": [
+    "plugins"
+  ],
+  "scripts": {
+    "ci:build": "echo 'Skipping...'",
+    "ci:deploy": "semantic-release pre && npm publish && semantic-release post",
+    "ci:lint:commits": "validate-commit-msgs --base origin/master",
+    "ci:lint:js": "eslint . -f junit -o lint.report.xml",
+    "ci:lint:styles": "echo 'Skipping...'",
+    "ci:test": "jest --coverage --testResultsProcessor jest-junit",
+    "commitmsg": "validate-commit-msg",
+    "precommit": "lint-staged"
+  },
+  "config": {
+    "validate-commit-msg": {
+      "autoFix": true,
+      "maxSubjectLength": 50
+    }
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "jest --coverage --findRelatedTests"
+    ]
+  },
+  "release": {
+    "verifyConditions": "condition-circle"
+  },
+  "engines": {
+    "node": ">= 6.3.1"
+  },
+  "devDependencies": {
+    "@rushplay/eslint-config-rushplay": "1.0.1",
+    "@rushplay/eslint-plugin-objects": "1.2.0",
+    "@rushplay/validate-commit-msgs": "^0.1.0",
+    "babel-core": "^6.24.0",
+    "condition-circle": "^1.5.0",
+    "eslint": "^3.14.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-react": "^6.9.0",
+    "husky": "^0.13.1",
+    "jest": "^19.0.2",
+    "jest-junit": "^1.3.0",
+    "lint-staged": "^3.4.0",
+    "semantic-release": "^6.3.2",
+    "validate-commit-msg": "^2.11.1"
+  },
+  "author": "Leonard Kinday <leonard@kinday.ru>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }

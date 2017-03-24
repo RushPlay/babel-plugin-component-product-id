@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`plugins/component-product-id skips other CallExpressions 1`] = `
+"
+const Component = {};
+React.createClass(Component);
+console.log(Component);"
+`;
+
+exports[`plugins/component-product-id skips string components 1`] = `
+"
+React.createClass('div');"
+`;
+
+exports[`plugins/component-product-id transforms createElement component name to LogicalExpression 1`] = `
+"
+const Component = {};
+React.createElement(Component[process.env.PRODUCT_ID] || Component);"
+`;

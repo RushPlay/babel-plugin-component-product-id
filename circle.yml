@@ -1,0 +1,49 @@
+# RushPlay NPM module Circle CI config, v3.2.0
+machine:
+  timezone:
+    Europe/Stockholm
+
+  node:
+    version: 6.3.1
+
+  environment:
+    JEST_JUNIT_OUTPUT: test.report.xml
+
+
+dependencies:
+  cache_directories:
+    - ~/.cache
+
+  pre:
+    - node --version >> $CIRCLE_ARTIFACTS/versions.txt
+    - npm --version >> $CIRCLE_ARTIFACTS/versions.txt
+    - yarn --version >> $CIRCLE_ARTIFACTS/versions.txt
+    # propagate NPM_TOKEN to npm’s config
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+
+  override:
+    - yarn install --no-progress
+
+
+test:
+  pre:
+    - yarn ci:lint:commits
+    - yarn ci:lint:js
+    - yarn ci:lint:styles
+
+  override:
+    - yarn ci:test
+
+  post:
+    # it’s fine if there’s nothing to move
+    - mv coverage $CIRCLE_ARTIFACTS || true
+    - mv *.report.xml $CIRCLE_TEST_REPORTS || true
+
+
+deployment:
+  npm:
+    branch: master
+    commands:
+      - yarn ci:build
+      # if there’s no release to publish, the build is still ok
+      - yarn ci:deploy || true
