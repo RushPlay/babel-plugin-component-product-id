@@ -1,3 +1,3 @@
-const componentProductId = require('./lib/component-product-id')
+const componentProductId = require('./plugins/component-product-id')
 
 module.exports = { plugins: [componentProductId] }
