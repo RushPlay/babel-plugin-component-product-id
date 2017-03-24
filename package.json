@@ -1,6 +1,7 @@
 {
   "name": "@rushplay/babel-preset-react",
   "version": "0.0.0-development",
+  "repository": "https://github.com/RushPlay/babel-preset-react",
   "main": "index.js",
   "files": [
     "plugins"
