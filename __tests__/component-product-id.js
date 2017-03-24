@@ -17,6 +17,22 @@ describe('plugins/component-product-id', () => {
     expect(code).toMatchSnapshot()
   })
 
+  it('uses given variable name instead process.env.PRODUCT_ID', () => {
+    // arrange
+    const input = `
+      const Component = {}
+      React.createElement(Component)
+    `
+    const pluginOptions = { productIdSource: '__PROD_ID__' }
+    const options = { plugins: [[componentProductId, pluginOptions]] }
+
+    // act
+    const { code } = transform(input, options)
+
+    // assert
+    expect(code).toMatchSnapshot()
+  })
+
   it('skips other CallExpressions', () => {
     // arrange
     const input = `
