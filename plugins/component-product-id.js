@@ -18,13 +18,7 @@ module.exports = function componentProductId(babel) {
             '||',
             t.memberExpression(
               componentIdentifier,
-              t.memberExpression(
-                t.memberExpression(
-                  t.identifier('process'),
-                  t.identifier('env')
-                ),
-                t.identifier('PRODUCT_ID')
-              ),
+              t.identifier('process.env.PRODUCT_ID'),
               true
             ),
             componentIdentifier
