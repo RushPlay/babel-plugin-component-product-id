@@ -10,7 +10,7 @@ module.exports = function componentProductId(babel) {
   return {
     name: 'component-product-id',
     visitor: {
-      CallExpression(path) {
+      CallExpression(path, state) {
         if (isTargetCallExpression(path)) {
           const componentIdentifier = path.node.arguments[0]
 
@@ -18,13 +18,7 @@ module.exports = function componentProductId(babel) {
             '||',
             t.memberExpression(
               componentIdentifier,
-              t.memberExpression(
-                t.memberExpression(
-                  t.identifier('process'),
-                  t.identifier('env')
-                ),
-                t.identifier('PRODUCT_ID')
-              ),
+              t.identifier(state.opts.productIdSource || 'process.env.PRODUCT_ID'),
               true
             ),
             componentIdentifier

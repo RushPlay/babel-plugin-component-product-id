@@ -17,3 +17,9 @@ exports[`plugins/component-product-id transforms createElement component name to
 const Component = {};
 React.createElement(Component[process.env.PRODUCT_ID] || Component);"
 `;
+
+exports[`plugins/component-product-id uses given variable name instead process.env.PRODUCT_ID 1`] = `
+"
+const Component = {};
+React.createElement(Component[__PROD_ID__] || Component);"
+`;
